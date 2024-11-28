@@ -110,6 +110,10 @@ h1 {
   border-radius: .5rem;
 }
 
+.added-to-cart .product-img {
+  border: 2px solid var(--red);
+}
+
 .atc-btn {
   position: absolute;
   left: 50%;
@@ -133,7 +137,7 @@ h1 {
   color: var(--red);
 }
 
-.added-to-cart {
+.added-to-cart .atc-btn {
   gap: 0;
   justify-content: space-between;
   align-items: center;
@@ -143,7 +147,7 @@ h1 {
   cursor: auto;
 }
 
-.added-to-cart:hover {
+.added-to-cart .atc-btn:hover {
   color: var(--white);
 }
 

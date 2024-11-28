@@ -14,7 +14,7 @@ export function renderProducts() {
     const productPrice = (product.price).toFixed(2);
 
     productsHTML += `
-      <div class="product">
+      <div class="product js-product-${product.id}">
         <div class="img-container">
           <picture>
             <source media="(min-width: 90rem)"
@@ -104,7 +104,7 @@ export function renderProducts() {
               </div>
             `;
 
-          document.querySelector(`.js-atc-${productId}`)
+          document.querySelector(`.js-product-${productId}`)
             .classList.add('added-to-cart');
 
           renderCart();
@@ -136,7 +136,7 @@ export function renderProducts() {
                     <div>Add to Cart</div>
                   `;
 
-                document.querySelector(`.js-atc-${productId}`)
+                document.querySelector(`.js-product-${productId}`)
                   .classList.remove('added-to-cart');
 
               } else {
