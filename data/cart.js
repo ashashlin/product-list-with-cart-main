@@ -13,3 +13,9 @@ export function removeFromCart(productId) {
 
   // localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function newEmptyCart() {
+  const newCart = [];
+
+  cart = newCart;
+}

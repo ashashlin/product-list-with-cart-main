@@ -25,7 +25,7 @@ export function renderProducts() {
 
             <source srcset="${productImgMobile}">
 
-            <img class="product-img" src="${productImgMobile}" alt="an image of ${productCategory}">
+            <img class="product-img" src="${productImgMobile}" alt="an image of ${productName}">
           </picture>
 
           <button class="atc-btn js-atc-btn js-atc-${product.id}"

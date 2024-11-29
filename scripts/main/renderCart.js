@@ -1,5 +1,6 @@
 import { cart } from "../../data/cart.js";
 import { products } from "../../data/products.js";
+import { renderModal } from "./modal.js";
 
 export function renderCart() {
   let cartQuantity = 0;
@@ -68,7 +69,7 @@ const cartHTML = `
       </p>
     </div>
 
-    <button class="confirm-order">
+    <button class="confirm-order js-confirm-order">
       Confirm Order
     </button>
   </div>
@@ -76,6 +77,14 @@ const cartHTML = `
 
 document.querySelector('.js-cart')
   .innerHTML = cartHTML;
+
+const modal = document.querySelector('.js-modal');
+
+document.querySelector('.js-confirm-order')
+  .addEventListener('click', () => {
+    renderModal();
+    modal.showModal();
+  });
 }
 
 function renderCartItems() {
