@@ -1,5 +1,5 @@
 import { products } from "../../data/products.js";
-import { cart, removeFromCart } from "../../data/cart.js";
+import { cart, removeFromCart, saveToStorage } from "../../data/cart.js";
 import { renderCart } from "./renderCart.js";
 
 export function renderProducts() {
@@ -70,7 +70,7 @@ export function renderProducts() {
             quantity: 1
           });
 
-          // localStorage.setItem('cart', JSON.stringify(cart));
+          saveToStorage();
 
           let quantity;
 
@@ -144,6 +144,7 @@ export function renderProducts() {
                   .innerHTML = `${matchingItem.quantity}`;
               }
 
+              saveToStorage();
               renderCart();
             }
           });
@@ -162,6 +163,8 @@ export function renderProducts() {
             });
 
             matchingItem.quantity++;
+
+            saveToStorage();
 
             document.querySelector(`.js-cart-quantity-${productId}`)
               .innerHTML = `${matchingItem.quantity}`;

@@ -1,4 +1,4 @@
-export let cart = [];
+export let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 export function removeFromCart(productId) {
   const newCart = [];
@@ -11,11 +11,17 @@ export function removeFromCart(productId) {
 
   cart = newCart;
 
-  // localStorage.setItem('cart', JSON.stringify(cart));
+  saveToStorage();
 }
 
 export function newEmptyCart() {
   const newCart = [];
 
   cart = newCart;
+
+  saveToStorage();
+}
+
+export function saveToStorage() {
+  localStorage.setItem('cart', JSON.stringify(cart));
 }
