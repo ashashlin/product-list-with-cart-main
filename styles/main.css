@@ -110,11 +110,12 @@ h1 {
   border-radius: .5rem;
 }
 
-.added-to-cart .product-img {
+/* .added-to-cart .product-img {
   border: 2px solid var(--red);
-}
+} */
 
-.atc-btn {
+.atc-btn,
+.added-to-cart {
   position: absolute;
   left: 50%;
   bottom: -1.3rem;
@@ -137,7 +138,7 @@ h1 {
   color: var(--red);
 }
 
-.added-to-cart .atc-btn {
+.added-to-cart {
   gap: 0;
   justify-content: space-between;
   align-items: center;
@@ -147,7 +148,7 @@ h1 {
   cursor: auto;
 }
 
-.added-to-cart .atc-btn:hover {
+.added-to-cart:hover {
   color: var(--white);
 }
 

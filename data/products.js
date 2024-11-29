@@ -1,3 +1,5 @@
+import { cart } from "./cart.js";
+
 export const products = [
   {
      "id": '1',
@@ -108,3 +110,68 @@ export const products = [
       "price": 6.50
    }
 ];
+
+export function renderATCBtn(productId) {
+   let isFound = false;
+   let matchingItem;
+   let btnHTML;
+
+   cart.forEach((cartItem) => {
+      if (cartItem.productId === productId) {
+         isFound = true;
+         matchingItem = cartItem;
+      }
+   });
+
+   if (!isFound) {
+      btnHTML = `
+         <img src="assets/images/icon-add-to-cart.svg" alt="an icon of a shopping cart with a plus sign in it">
+         <div>Add to Cart</div>
+      `;
+   } else {
+      btnHTML = `
+         <div class="adjust-q-icon js-decrement js-decrement-${productId}"
+         data-product-id="${productId}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="2" fill="none" viewBox="0 0 10 2">
+            <path fill="#fff" d="M0 .375h10v1.25H0V.375Z"/>
+            </svg>
+         </div>
+
+         <div class="js-cart-quantity-${productId}">
+            ${matchingItem.quantity}
+         </div>
+
+         <div class="adjust-q-icon js-increment js-increment-${productId}"
+         data-product-id="${productId}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10">
+            <path fill="#fff" d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/>
+            </svg>
+         </div>
+      `;
+   }
+
+   return btnHTML;
+}
+
+export function renderATCBtnClass(productId) {
+   let isFound = false;
+   let btnClassHTML;
+
+   cart.forEach((cartItem) => {
+      if (cartItem.productId === productId) {
+         isFound = true;
+      }
+   });
+
+   if (!isFound) {
+      btnClassHTML = `
+         atc-btn js-atc-btn js-atc-${productId}
+      `;
+   } else {
+      btnClassHTML = `
+         added-to-cart js-added-to-cart js-added-to-cart-${productId}
+      `;
+   }
+
+   return btnClassHTML;
+}
