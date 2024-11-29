@@ -43,62 +43,68 @@ export function renderCart() {
     orderTotal += cartItem.quantity * matchingProduct.price;
   });
 
-const cartHTML = `
-  <h2>
-    Your Cart (${cartQuantity})
-  </h2>
+  const cartHTML = `
+    <h2>
+      Your Cart (${cartQuantity})
+    </h2>
 
-  <div class="cart-items">
-    ${renderCartItems()}
-  </div>
-
-  <div class="cart-total">
-    <div class="cart-order-total">
-      <p class="order-total">
-        Order Total
-      </p>
-      <p class="price-total">
-        $${orderTotal.toFixed(2)}
-      </p>
+    <div class="cart-items">
+      ${renderCartItems()}
     </div>
 
-    <div class="delivery-msg">
-      <img src="assets/images/icon-carbon-neutral.svg" alt="an icon of a little tree">
+    <div class="cart-total">
+      <div class="cart-order-total">
+        <p class="order-total">
+          Order Total
+        </p>
+        <p class="price-total">
+          $${orderTotal.toFixed(2)}
+        </p>
+      </div>
 
-      <p>
-        This is a <span>carbon-neutral</span> delivery
-      </p>
+      <div class="delivery-msg">
+        <img src="assets/images/icon-carbon-neutral.svg" alt="an icon of a little tree">
+
+        <p>
+          This is a <span>carbon-neutral</span> delivery
+        </p>
+      </div>
+
+      <button class="confirm-order js-confirm-order">
+        Confirm Order
+      </button>
     </div>
+  `;
 
-    <button class="confirm-order js-confirm-order">
-      Confirm Order
-    </button>
-  </div>
-`;
+  document.querySelector('.js-cart')
+    .innerHTML = cartHTML;
 
-document.querySelector('.js-cart')
-  .innerHTML = cartHTML;
+  document.querySelectorAll('.js-remove-item')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        const {productId} = button.dataset;
 
-document.querySelectorAll('.js-remove-item')
-  .forEach((button) => {
-    button.addEventListener('click', () => {
-      const {productId} = button.dataset;
+        removeFromCart(productId);
 
-      removeFromCart(productId);
+        renderCart();
 
-      renderCart();
-
-      renderProducts();
+        renderProducts();
+      });
     });
-  });
 
-const modal = document.querySelector('.js-modal');
+  const modal = document.querySelector('.js-modal');
 
-document.querySelector('.js-confirm-order')
-  .addEventListener('click', () => {
+  document.querySelector('.js-confirm-order')
+    .addEventListener('click', () => {
+      renderModal();
+      modal.showModal();
+      localStorage.setItem('modalOpen', 'true');
+    });
+
+  if (localStorage.getItem('modalOpen') === 'true') {
     renderModal();
     modal.showModal();
-  });
+  }
 }
 
 function renderCartItems() {

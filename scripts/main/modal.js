@@ -64,6 +64,7 @@ export function renderModal() {
     .addEventListener('click', () => {
       newEmptyCart();
       modal.close();
+      localStorage.setItem('modalOpen', 'false');
       renderProducts();
       renderCart();
     });
