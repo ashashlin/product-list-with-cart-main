@@ -1,6 +1,7 @@
-import { cart } from "../../data/cart.js";
+import { cart, removeFromCart } from "../../data/cart.js";
 import { products } from "../../data/products.js";
 import { renderModal } from "./modal.js";
+import { renderProducts } from "./renderProducts.js";
 
 export function renderCart() {
   let cartQuantity = 0;
@@ -78,6 +79,19 @@ const cartHTML = `
 document.querySelector('.js-cart')
   .innerHTML = cartHTML;
 
+document.querySelectorAll('.js-remove-item')
+  .forEach((button) => {
+    button.addEventListener('click', () => {
+      const {productId} = button.dataset;
+
+      removeFromCart(productId);
+
+      renderCart();
+
+      renderProducts();
+    });
+  });
+
 const modal = document.querySelector('.js-modal');
 
 document.querySelector('.js-confirm-order')
@@ -121,7 +135,8 @@ function renderCartItems() {
           </div>
         </div>
 
-        <div class="remove-item-icon">
+        <div class="remove-item-icon js-remove-item"
+        data-product-id="${matchingProduct.id}">
           <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10">
             <path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/>
           </svg>
